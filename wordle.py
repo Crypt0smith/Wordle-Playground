@@ -7,7 +7,7 @@ init()
 
 
 def all_words_to_five():
-	words = load_words('WordList.txt')
+	words = load_words('data/WordList.txt')
 
 	five_length = []
 
@@ -17,7 +17,7 @@ def all_words_to_five():
 
 	print(len(five_length))
 
-	with open('five.txt', 'w') as f:
+	with open('data/five.txt', 'w') as f:
 		f.write("\n".join(five_length) + "\n")
 
 
@@ -143,7 +143,7 @@ def response_to_output(word, resp, known_letters, close_letters, excluded_letter
 
 #all_words_to_five()
 
-words = load_words('five.txt')
+words = load_words('data/five.txt')
 
 def cheater():
 	file_cheat = "five - Copy.txt"
