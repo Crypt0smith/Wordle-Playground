@@ -333,7 +333,7 @@ def run_ais():
 #run_ais()
 
 selected_word = random_element(words)
-#selected_word = 'readd'
+#selected_word = 'septs'
 
 #print(selected_word)
 val = ""
