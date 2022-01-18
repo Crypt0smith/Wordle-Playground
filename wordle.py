@@ -67,6 +67,8 @@ def compare_words(guess, word):
 	for i in range(0, len(guess)):
 		if word[i] != WORD_COMPARE_PLACEHOLDER and guess[i] in word:
 			ret[i] = WORD_COMPARE_CLOSE
+			#replace the close match to prevent duplicate close matches
+			word = word.replace(guess[i], WORD_COMPARE_PLACEHOLDER, 1)
 
 	return ret
 
