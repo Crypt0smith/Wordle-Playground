@@ -40,17 +40,24 @@ def random_element(a):
 WORD_COMPARE_EXACT = 'x'
 WORD_COMPARE_CLOSE = 'c'
 WORD_COMPARE_MISS = '_'
+WORD_COMPARE_PLACEHOLDER = '.'
 
 def compare_words(guess, word):
 	ret = []
 
 	for i in range(0, len(guess)):
-		if guess[i] == word[i]:
+		if guess[i] in word[i]:
 			ret.append(WORD_COMPARE_EXACT)
-		elif guess[i] in word:
-			ret.append(WORD_COMPARE_CLOSE)
+			#replace the exact match to prevent duplicate close matches
+			word = word[:i] + WORD_COMPARE_PLACEHOLDER + word[i + 1:]
 		else:
 			ret.append(WORD_COMPARE_MISS)
+
+	#upgrade misses to close matches
+	for i in range(0, len(guess)):
+		if word[i] != WORD_COMPARE_PLACEHOLDER and guess[i] in word:
+			ret[i] = WORD_COMPARE_CLOSE
+
 	return ret
 
 def score_guess(response):
