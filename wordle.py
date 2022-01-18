@@ -2,6 +2,16 @@ import random
 from colorama import Fore
 from colorama import Style
 from colorama import init
+import sys
+
+#print('Number of arguments:', len(sys.argv), 'arguments.')
+#print('Argument List:', str(sys.argv))
+
+predetermined_word = None
+if (len(sys.argv) > 1):
+	predetermined_word = sys.argv[1]
+
+
 init()
 
 
@@ -140,7 +150,7 @@ def response_to_output(word, resp, known_letters, close_letters, excluded_letter
 				close_letters.append(letter)
 		else:
 			pretty_response = pretty_response + Style.RESET_ALL + letter
-			if not letter in excluded_letters:
+			if not letter in excluded_letters and not letter in known_letters:
 				excluded_letters.append(letter)
 				excluded_letters.sort()
 			known.append(" ")
@@ -340,13 +350,9 @@ def run_ais():
 #run_ais()
 
 selected_word = random_element(words)
-#selected_word = 'septs'
-
-#print(selected_word)
-val = ""
-remaining_words = words
-
-
+if predetermined_word != None:
+	print("Predetermined word:", predetermined_word)
+	selected_word = predetermined_word
 
 #new ai that focuses on the close ones!
 #closes can count the words that have instances of that letter in each of the available columns! that is a GREAT gamble
@@ -359,6 +365,8 @@ excluded_letters = []
 close_letters = []
 known_letters = []
 close_by_pos = [[],[],[],[],[]]
+val = ""
+remaining_words = words
 
 while val != selected_word:
 	print(f"{len(remaining_words)} Remaining words")
@@ -381,10 +389,10 @@ while val != selected_word:
 		val = val[0:5]
 
 	if val == "c":
-		print(selected_word)
-		print(close_letters)
-		print(excluded_letters)
-		print(close_by_pos)
+		print("target:", selected_word)
+		print("close", close_letters)
+		print("excluded", excluded_letters)
+		print("close by pos", close_by_pos)
 	if val == "s":
 		print(",".join(remaining_words))
 
