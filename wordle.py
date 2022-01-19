@@ -65,7 +65,7 @@ def compare_words(guess, word):
 
 	#upgrade misses to close matches
 	for i in range(0, len(guess)):
-		if word[i] != WORD_COMPARE_PLACEHOLDER and guess[i] in word:
+		if guess[i] in word:
 			ret[i] = WORD_COMPARE_CLOSE
 			#replace the close match to prevent duplicate close matches
 			word = word.replace(guess[i], WORD_COMPARE_PLACEHOLDER, 1)
@@ -144,6 +144,8 @@ def response_to_output(word, resp, known_letters, close_letters, excluded_letter
 			close.append("")
 			if not letter in known_letters:
 				known_letters.append(letter)
+			if letter in excluded_letters:
+				excluded_letters.remove(letter) #letters might have been excluded earlier like guess: bloom for target: elbow TODO: add test cases!
 		elif resp[i] == WORD_COMPARE_CLOSE:
 			pretty_response = pretty_response + Fore.YELLOW + letter
 			known.append(" ")
