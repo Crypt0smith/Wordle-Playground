@@ -65,7 +65,7 @@ def compare_words(guess, word):
 
 	#upgrade misses to close matches
 	for i in range(0, len(guess)):
-		if guess[i] in word:
+		if ret[i] == WORD_COMPARE_MISS and guess[i] in word:
 			ret[i] = WORD_COMPARE_CLOSE
 			#replace the close match to prevent duplicate close matches
 			word = word.replace(guess[i], WORD_COMPARE_PLACEHOLDER, 1)
